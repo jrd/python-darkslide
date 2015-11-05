@@ -491,9 +491,11 @@ class Generator(object):
     def process_macros(self, content, source=None, context=None):
         """ Processed all macros.
         """
+        macro_options = {'relative': self.relative, 'linenos': self.linenos}
         classes = []
-        for macro in self.macros:
+        for macro_class in self.macros:
             try:
+                macro = macro_class(logger=self.logger, embed=self.embed, options=macro_options)
                 content, add_classes = macro.process(content, source, context)
                 if add_classes:
                     classes += add_classes
@@ -505,10 +507,9 @@ class Generator(object):
     def register_macro(self, *macros):
         """ Registers macro classes passed a method arguments.
         """
-        macro_options = {'relative': self.relative, 'linenos': self.linenos}
         for m in macros:
             if inspect.isclass(m) and issubclass(m, macro_module.Macro):
-                self.macros.append(m(logger=self.logger, embed=self.embed, options=macro_options))
+                self.macros.append(m)
             else:
                 raise TypeError("Couldn't register macro; a macro must inherit"
                                 " from macro.Macro")
