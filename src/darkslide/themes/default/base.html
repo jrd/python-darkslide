@@ -136,14 +136,14 @@
       <caption>Table of Contents</caption>
       {% for section in toc %}
       <tr id="toc-row-{{ section.number }}">
-        <th><a href="#slide{{ section.number }}">{{ section.title }}</a></th>
-        <td><a href="#slide{{ section.number }}">{{ section.number }}</a></td>
+        <th><a href="#slide:{{ section.number }}">{{ section.title }}</a></th>
+        <td><a href="#slide:{{ section.number }}">{{ section.number }}</a></td>
       </tr>
       {% if section.sub %}
         {% for subsection in section.sub %}
         <tr id="toc-row-{{ subsection.number }}" class="sub">
-          <th><a href="#slide{{ subsection.number }}">{{ subsection.title }}</a></th>
-          <td><a href="#slide{{ subsection.number }}">{{ subsection.number }}</a></td>
+          <th><a href="#slide:{{ subsection.number }}">{{ subsection.title }}</a></th>
+          <td><a href="#slide:{{ subsection.number }}">{{ subsection.number }}</a></td>
         </tr>
         {% endfor %}
       {% endif %}
